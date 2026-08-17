@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC820" />
+      <stop offset="100%" stop-color="#F5B800" />
+    </linearGradient>
+  </defs>
+
+  <!-- Emblem Icon -->
+  <g transform="translate(140, 10)">
+    <!-- Yellow Wave Ribbons (Left) -->
+    <path d="M15 65 C25 35, 40 10, 55 5 C60 3, 65 8, 60 18 C48 38, 35 62, 22 75 C18 78, 12 75, 15 65 Z" fill="url(#goldGradDark)" />
+    <path d="M35 65 C45 35, 60 10, 75 5 C80 3, 85 8, 80 18 C68 38, 55 62, 42 75 C38 78, 32 75, 35 65 Z" fill="url(#goldGradDark)" />
+    <path d="M55 65 C65 35, 80 10, 95 5 C100 3, 105 8, 100 18 C88 38, 75 62, 62 75 C58 78, 52 75, 55 65 Z" fill="url(#goldGradDark)" />
+
+    <!-- Overlapping Charcoal / Silver Wave Structure (Right) -->
+    <path d="M65 75 C75 55, 90 25, 110 8 C115 4, 122 8, 118 16 C105 38, 92 62, 80 75 C75 80, 62 82, 65 75 Z" fill="#171B20" />
+    <path d="M102 24 L114 12 L125 32 L112 40 Z" fill="#94A3B8" />
+    <path d="M80 75 C95 82, 110 75, 125 55 C135 40, 145 20, 155 8 C160 3, 166 6, 162 15 C148 40, 132 68, 118 78 C105 87, 88 84, 80 75 Z" fill="#171B20" />
+    <path d="M118 78 C132 87, 148 80, 160 62 C172 42, 185 20, 198 8 C202 4, 207 7, 204 14 C190 38, 175 65, 162 75 C148 86, 128 85, 118 78 Z" fill="#171B20" />
+  </g>
+
+  <!-- Typography -->
+  <text x="240" y="112" font-family="'Montserrat', sans-serif" font-weight="900" font-size="28" fill="#F5B800" text-anchor="middle" letter-spacing="1.5">
+    AL MAMOURA <tspan fill="#171B20">FIBERGLASS</tspan>
+  </text>
+
+  <text x="240" y="138" font-family="'Brush Script MT', 'Segoe Script', 'Great Vibes', cursive" font-style="italic" font-weight="400" font-size="20" fill="#252A30" text-anchor="middle" letter-spacing="0.5">
+    Reinforcing the concepts
+  </text>
+</svg>

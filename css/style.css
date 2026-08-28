@@ -389,18 +389,31 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Brand Logo Container */
 .brand-logo-wrap {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
-  height: 56px;
+  height: 100%;
   text-decoration: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.brand-logo-wrap:hover {
+  opacity: 0.92;
 }
 
 .brand-logo-wrap img {
-  height: 100%;
-  width: auto;
-  max-width: 230px;
+  width: 160px;
+  height: auto;
+  max-height: 52px;
   object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .brand-logo-wrap img {
+    width: 120px;
+    max-height: 42px;
+  }
 }
 
 /* Navigation Menu - Pure Black #000000 with Yellow Active Accent */

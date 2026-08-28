@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initBrandIntroScreen();
   initStickyHeader();
   initMegaMenuInteraction();
   initMobileNav();
@@ -16,6 +17,39 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initSmoothScroll();
 });
+
+/* --------------------------------------------------------------------------
+   00. PREMIUM WEBSITE INTRO SPLASH SCREEN
+   -------------------------------------------------------------------------- */
+function initBrandIntroScreen() {
+  const introScreen = document.getElementById('brandIntroScreen');
+  if (!introScreen) return;
+
+  // Lock body scroll while splash screen is active
+  document.body.style.overflow = 'hidden';
+
+  // Smoothly fade out intro screen after 2.5 seconds
+  setTimeout(() => {
+    introScreen.classList.add('fade-out');
+    document.body.style.overflow = '';
+  }, 2500);
+
+  // Remove overlay from display after transition finishes
+  introScreen.addEventListener('transitionend', () => {
+    if (introScreen.classList.contains('fade-out')) {
+      introScreen.style.display = 'none';
+    }
+  });
+
+  // Safety fallback cleanup
+  setTimeout(() => {
+    document.body.style.overflow = '';
+    if (introScreen && introScreen.style.display !== 'none') {
+      introScreen.classList.add('fade-out');
+      setTimeout(() => { introScreen.style.display = 'none'; }, 800);
+    }
+  }, 3800);
+}
 
 /* --------------------------------------------------------------------------
    01. STICKY HEADER & SCROLL SPY

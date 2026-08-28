@@ -53,6 +53,196 @@
   --radius-lg: 12px;
 }
 
+/* ==========================================================================
+   00. PREMIUM BRAND INTRO SPLASH SCREEN
+   ========================================================================== */
+.brand-intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFFFFF;
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(245, 184, 0, 0.07) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(245, 184, 0, 0.03) 0%, transparent 40%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.brand-intro-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.intro-content-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  max-width: 520px;
+  width: 90%;
+}
+
+.intro-logo-box {
+  position: relative;
+  margin-bottom: 22px;
+  opacity: 0;
+  transform: scale(0.92) translateY(10px);
+  animation: introLogoFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.15s;
+}
+
+.intro-logo-img {
+  width: 220px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Shimmer Light Reflection Sweep across Logo */
+.intro-shimmer-sweep {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.85) 50%, 
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: introShimmerSweep 1.2s ease-in-out 0.75s forwards;
+  pointer-events: none;
+}
+
+.intro-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: introTextFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+}
+
+.intro-accent-line {
+  width: 48px;
+  height: 3px;
+  background: var(--brand-yellow);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: scaleX(0);
+  animation: introLineExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
+}
+
+.intro-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 2vw, 0.98rem);
+  font-weight: 500;
+  color: var(--brand-mid-grey);
+  letter-spacing: 0.04em;
+  margin: 0 0 26px 0;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: introTextFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
+}
+
+.intro-loader-track {
+  width: 140px;
+  height: 3px;
+  background: #E2E8F0;
+  border-radius: 3px;
+  overflow: hidden;
+  opacity: 0;
+  animation: introFadeOnly 0.5s ease forwards 0.8s;
+}
+
+.intro-loader-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-yellow), #FFD700);
+  border-radius: 3px;
+  animation: introProgressFill 1.7s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.85s;
+}
+
+/* Intro Keyframe Animations */
+@keyframes introLogoFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes introShimmerSweep {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+@keyframes introTextFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introLineExpand {
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes introFadeOnly {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes introProgressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-logo-img {
+    width: 170px;
+  }
+  .intro-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.1em;
+  }
+  .intro-tagline {
+    font-size: 0.82rem;
+  }
+}
+
 /* --------------------------------------------------------------------------
    02. RESET & BASE
    -------------------------------------------------------------------------- */

@@ -11,25 +11,25 @@ const DEFAULT_CMS_DATA = {
     logoUrl: '../assets/images/logo-transparent.png',
     faviconUrl: '../assets/images/logo-transparent.png',
     primaryColor: '#F5B800',
-    whatsappNumber: '+971555115580',
-    primaryPhone: '+971 55 511 5580',
-    secondaryPhone: '+971 50 467 7800',
+    whatsappNumber: '+971504677800',
+    primaryPhone: '+971 50 467 7800',
+    secondaryPhone: '+971 55 511 5580',
     email: 'Info@almamourafiberglass.ae',
     address: 'Shop / Warehouse No. 06, South Sector, Industrial Area 2, Ajman – UAE',
     businessHours: 'Mon - Sat: 8:00 AM - 6:00 PM | Sunday: Closed',
     mapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.2854917454746!2d55.4851!3d25.3952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDIzJzQyLjciTiA1NcKwMjknMDYuNCJF!5e0!3m2!1sen!2sae!4v1786790000000!5m2!1sen!2sae',
     heroTitle: 'ENGINEERING EXCELLENCE IN FIBERGLASS & GRP SOLUTIONS',
-    heroSubtitle: 'Al Mamoura Fiberglass Products Trading L.L.C. (License #78445) is a premier UAE manufacturer & supplier of high-grade GRP Panel Water Tanks, GRP Lining, Fiberglass Swimming Pools, GRC Planters, and Industrial FRP Products.'
+    heroSubtitle: 'Al Mamoura Fiberglass (License #78445) is a premier UAE manufacturer & supplier of high-grade GRP Panel Water Tanks, GRP Lining, Fiberglass Swimming Pools, Water Fountains, GRC Planters, and Industrial FRP Products.'
   },
   social: {
     linkedin: 'https://www.linkedin.com/company/al-mamoura-fiberglass',
     instagram: 'https://www.instagram.com/almamourafiberglass',
     facebook: 'https://www.facebook.com/almamourafiberglass',
     youtube: 'https://www.youtube.com/@almamourafiberglass',
-    whatsapp: 'https://wa.me/971555115580'
+    whatsapp: 'https://wa.me/971504677800'
   },
   seo: {
-    metaTitle: 'Al Mamoura Fiberglass | GRP Panel Water Tanks & Swimming Pools UAE',
+    metaTitle: 'Al Mamoura Fiberglass | Fiberglass Pools, Fountains & Landscaping',
     metaDescription: 'Leading supplier & contractor of GRP panel water tanks, GRP lining, GRC planters, and fiberglass swimming pools in Ajman, Dubai & UAE. Trade License #78445.',
     keywords: 'Fiberglass UAE, GRP Panel Tanks UAE, Fiberglass Swimming Pools Ajman, GRP Lining Dubai, Al Mamoura Fiberglass'
   },

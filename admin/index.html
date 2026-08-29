@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al Mamoura Fiberglass | Enterprise CMS Admin Panel</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/logo-transparent.png">
+</head>
+<body>
+
+  <!-- =========================================================================
+       00. AUTHENTICATION / LOGIN OVERLAY
+       ========================================================================= -->
+  <div class="admin-auth-overlay" id="authOverlay">
+    <div class="auth-card">
+      <img src="../assets/images/logo-transparent.png" alt="Al Mamoura Fiberglass" class="auth-logo">
+      <h2 class="auth-title">CMS Admin Portal</h2>
+      <p class="auth-subtitle">Enter your credentials to access website management</p>
+      
+      <form id="loginForm">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="authEmail" class="form-input" value="admin@almamourafiberglass.ae" required>
+        </div>
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Password</label>
+          <input type="password" id="authPassword" class="form-input" value="admin123" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">LOGIN TO DASHBOARD &rarr;</button>
+      </form>
+      <p style="font-size:0.75rem; color:#64748B; margin-top:20px;">
+        Default Credentials: <strong>admin@almamourafiberglass.ae</strong> / <strong>admin123</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       01. SIDEBAR NAVIGATION
+       ========================================================================= -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo-transparent.png" alt="Al Mamoura Fiberglass" class="sidebar-brand-img">
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">MAIN MENU</div>
+      <a href="#" class="sidebar-menu-item active" data-tab="dashboard">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="sidebar-menu-item" data-tab="content">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        <span>Website Content</span>
+      </a>
+      <a href="#" class="sidebar-menu-item" data-tab="products">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 13H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h16c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1zM4 19h16c.55 0 1-.45 1-1v-2c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1z"/></svg>
+        <span>Products</span>
+      </a>
+      <a href="#" class="sidebar-menu-item" data-tab="projects">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+        <span>Projects</span>
+      </a>
+      <a href="#" class="sidebar-menu-item" data-tab="services">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <span>Services</span>
+      </a>
+
+      <div class="nav-section-title">LEADS &amp; CRM</div>
+      <a href="#" class="sidebar-menu-item" data-tab="enquiries">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span>Enquiries / Leads</span>
+        <span class="badge-count" id="sidebarEnqBadge">3</span>
+      </a>
+
+      <div class="nav-section-title">MEDIA &amp; SEO</div>
+      <a href="#" class="sidebar-menu-item" data-tab="media">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>Media Library</span>
+      </a>
+      <a href="#" class="sidebar-menu-item" data-tab="seo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <span>SEO Settings</span>
+      </a>
+
+      <div class="nav-section-title">ADMINISTRATION</div>
+      <a href="#" class="sidebar-menu-item" data-tab="settings">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+        <span>Website Settings</span>
+      </a>
+      <a href="#" class="sidebar-menu-item" data-tab="users">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <span>Admin Users</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">AM</div>
+        <div class="user-info">
+          <div class="user-name">Super Admin</div>
+          <div class="user-role">admin@almamourafiberglass.ae</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       02. MAIN CONTENT AREA
+       ========================================================================= -->
+  <main class="admin-main">
+    
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" placeholder="Search enquiries, products, projects...">
+      </div>
+
+      <div class="topbar-actions">
+        <a href="../index.html" target="_blank" class="btn-view-site">
+          <span>View Live Website</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        </a>
+        <button class="btn-icon" id="btnLogout" title="Logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Body Content Panes -->
+    <div class="admin-body">
+      
+      <!-- TAB 1: DASHBOARD -->
+      <section class="tab-pane active" id="tab-dashboard">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Executive Dashboard</h1>
+            <p class="page-subtitle">Real-time overview of website enquiries, products, and operational stats.</p>
+          </div>
+          <button class="btn btn-primary" onclick="exportEnquiriesCSV()">📥 Export Enquiries (CSV)</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-lbl">Total Enquiries</div>
+              <div class="stat-val" id="dashTotalEnquiries">0</div>
+            </div>
+            <div class="stat-icon-wrap gold">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-lbl">Active Products</div>
+              <div class="stat-val" id="dashTotalProducts">0</div>
+            </div>
+            <div class="stat-icon-wrap blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 13H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h16c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1zM4 19h16c.55 0 1-.45 1-1v-2c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1z"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-lbl">Featured Projects</div>
+              <div class="stat-val" id="dashTotalProjects">0</div>
+            </div>
+            <div class="stat-icon-wrap green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-lbl">Core Services</div>
+              <div class="stat-val" id="dashTotalServices">0</div>
+            </div>
+            <div class="stat-icon-wrap purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="card-box-header">
+            <h3 class="card-box-title">Recent Customer Enquiries &amp; Leads</h3>
+            <a href="#" class="btn btn-secondary btn-sm" onclick="document.querySelector('[data-tab=enquiries]').click()">View All Leads</a>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Customer Name &amp; City</th>
+                  <th>Required Product/Service</th>
+                  <th>Contact Phone</th>
+                  <th>Lead Status</th>
+                  <th>Date &amp; Time</th>
+                </tr>
+              </thead>
+              <tbody id="dashRecentEnquiriesBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: WEBSITE CONTENT -->
+      <section class="tab-pane" id="tab-content">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Website Content Management</h1>
+            <p class="page-subtitle">Update homepage text, hero banners, and company overview.</p>
+          </div>
+          <button class="btn btn-primary" onclick="saveWebsiteSettings()">💾 Save Content Changes</button>
+        </div>
+
+        <div class="card-box" style="padding: 24px;">
+          <div class="form-group">
+            <label class="form-label">Homepage Hero Main Headline</label>
+            <input type="text" id="settingHeroTitle" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Homepage Hero Subtitle / Description</label>
+            <textarea id="settingHeroSubtitle" class="form-textarea" rows="3"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: PRODUCTS -->
+      <section class="tab-pane" id="tab-products">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Products Management</h1>
+            <p class="page-subtitle">Manage GRP Panel Tanks, Pools, Planters, and Pipes catalog.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openProductModal()">➕ Add New Product</button>
+        </div>
+
+        <div class="card-box">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product Name &amp; Specs</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Featured</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: PROJECTS -->
+      <section class="tab-pane" id="tab-projects">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Projects Portfolio</h1>
+            <p class="page-subtitle">Manage major projects and installation portfolio.</p>
+          </div>
+          <button class="btn btn-primary" onclick="document.getElementById('projectModal').classList.add('open')">➕ Add New Project</button>
+        </div>
+
+        <div class="card-box">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Project Title &amp; Client</th>
+                  <th>Location</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="projectsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: SERVICES -->
+      <section class="tab-pane" id="tab-services">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Engineering Services</h1>
+            <p class="page-subtitle">Manage core manufacturing and installation services.</p>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Service Title</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="servicesTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: ENQUIRIES / CRM -->
+      <section class="tab-pane" id="tab-enquiries">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Enquiries &amp; CRM Leads</h1>
+            <p class="page-subtitle">Track customer enquiries, contact history, and status.</p>
+          </div>
+          <button class="btn btn-primary" onclick="exportEnquiriesCSV()">📥 Export to CSV</button>
+        </div>
+
+        <div class="card-box">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Customer Name &amp; Date</th>
+                  <th>Contact Info</th>
+                  <th>Required Service</th>
+                  <th>Location</th>
+                  <th>Update Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="enquiriesTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: MEDIA LIBRARY -->
+      <section class="tab-pane" id="tab-media">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Media Library</h1>
+            <p class="page-subtitle">Manage uploaded logos, project photos, and product artwork.</p>
+          </div>
+        </div>
+
+        <div class="card-box" style="padding: 24px;">
+          <div class="media-grid" id="mediaLibraryGrid">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 8: SEO SETTINGS -->
+      <section class="tab-pane" id="tab-seo">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">SEO &amp; Meta Optimization</h1>
+            <p class="page-subtitle">Configure search engine meta titles, descriptions, and keywords.</p>
+          </div>
+          <button class="btn btn-primary" onclick="saveWebsiteSettings()">💾 Save SEO Settings</button>
+        </div>
+
+        <div class="card-box" style="padding: 24px;">
+          <div class="form-group">
+            <label class="form-label">Global Meta Title</label>
+            <input type="text" id="seoMetaTitle" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Global Meta Description</label>
+            <textarea id="seoMetaDescription" class="form-textarea" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">SEO Keywords (Comma Separated)</label>
+            <input type="text" id="seoKeywords" class="form-input">
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 9: SETTINGS -->
+      <section class="tab-pane" id="tab-settings">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">General Website Settings</h1>
+            <p class="page-subtitle">Update company contact details, address, phone numbers, and social links.</p>
+          </div>
+          <button class="btn btn-primary" onclick="saveWebsiteSettings()">💾 Save General Settings</button>
+        </div>
+
+        <div class="card-box" style="padding: 24px;">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Website Title</label>
+              <input type="text" id="settingSiteTitle" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Official Email</label>
+              <input type="email" id="settingEmail" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primary Phone</label>
+              <input type="text" id="settingPhone1" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Secondary Phone</label>
+              <input type="text" id="settingPhone2" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">WhatsApp Direct Dial Number</label>
+              <input type="text" id="settingWhatsapp" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Business Hours</label>
+              <input type="text" id="settingHours" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Primary Office / Warehouse Address</label>
+            <textarea id="settingAddress" class="form-textarea" rows="2"></textarea>
+          </div>
+
+          <h3 class="card-box-title" style="margin: 24px 0 16px;">Social Media Accounts</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">LinkedIn Company Page</label>
+              <input type="text" id="socialLinkedin" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Instagram Profile</label>
+              <input type="text" id="socialInstagram" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Facebook Page</label>
+              <input type="text" id="socialFacebook" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">YouTube Channel</label>
+              <input type="text" id="socialYoutube" class="form-input">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 10: USERS -->
+      <section class="tab-pane" id="tab-users">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Admin Users &amp; Roles</h1>
+            <p class="page-subtitle">Manage administrative accounts and permissions.</p>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>User Name</th>
+                  <th>Email Address</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       MODALS
+       ========================================================================= -->
+  <!-- Product Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="prodModalTitle">Add New Product</h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('productModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="prodId">
+        <div class="form-group">
+          <label class="form-label">Product Name *</label>
+          <input type="text" id="prodName" class="form-input" required>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="prodCategory" class="form-select">
+              <option value="Water Storage">Water Storage</option>
+              <option value="Piping Systems">Piping Systems</option>
+              <option value="Pools & Leisure">Pools & Leisure</option>
+              <option value="Architectural">Architectural</option>
+              <option value="GRP Lining">GRP Lining</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Specifications / Capacity</label>
+            <input type="text" id="prodSpec" class="form-input" placeholder="e.g. 1,000 to 500,000 Liters">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="prodDesc" class="form-textarea" rows="3"></textarea>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select id="prodStatus" class="form-select">
+              <option value="Published">Published</option>
+              <option value="Draft">Draft</option>
+            </select>
+          </div>
+          <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:28px;">
+            <input type="checkbox" id="prodFeatured">
+            <label for="prodFeatured" style="font-size:0.85rem; font-weight:700;">Show as Featured Product</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('productModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Project</h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('projectModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Project Title *</label>
+          <input type="text" id="projTitle" class="form-input" required>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Client Name</label>
+            <input type="text" id="projClient" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <input type="text" id="projLocation" class="form-input" placeholder="e.g. Dubai, UAE">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <input type="text" id="projCategory" class="form-input" placeholder="e.g. Commercial Storage">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('projectModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProject()">Save Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Admin JS Engine -->
+  <script src="js/admin.js"></script>
+</body>
+</html>

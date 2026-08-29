@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  syncCMSContentToLiveWebsite();
   initBrandIntroScreen();
   initStickyHeader();
   initMegaMenuInteraction();
@@ -17,6 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initSmoothScroll();
 });
+
+function syncCMSContentToLiveWebsite() {
+  try {
+    const cmsRaw = localStorage.getItem('ALMAMOURA_CMS_STORE');
+    if (!cmsRaw) return;
+    const cms = JSON.parse(cmsRaw);
+    if (!cms || !cms.settings) return;
+
+    // Update Hero Title & Subtitle if present
+    const heroTitleEl = document.querySelector('.hero-title-main');
+    if (heroTitleEl && cms.settings.heroTitle) {
+      heroTitleEl.innerText = cms.settings.heroTitle;
+    }
+    const heroDescEl = document.querySelector('.hero-desc-text');
+    if (heroDescEl && cms.settings.heroSubtitle) {
+      heroDescEl.innerText = cms.settings.heroSubtitle;
+    }
+  } catch (err) {
+    console.error('CMS sync error:', err);
+  }
+}
 
 /* --------------------------------------------------------------------------
    00. PREMIUM WEBSITE INTRO SPLASH SCREEN
@@ -627,8 +649,41 @@ function initContactForm() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const phoneInput = document.getElementById('contactPhone');
+    const messageInput = document.getElementById('contactMessage');
+
     const name = nameInput ? nameInput.value : 'Valued Client';
-    showToast(`Thank you, ${name}! Your inquiry has been routed to Al Mamoura Engineering.`);
+    const email = emailInput ? emailInput.value : 'client@company.com';
+    const phone = phoneInput ? phoneInput.value : '+971 50 000 0000';
+    const message = messageInput ? messageInput.value : 'Inquiry for GRP solutions';
+
+    // Save lead into CMS store
+    try {
+      const cmsRaw = localStorage.getItem('ALMAMOURA_CMS_STORE');
+      if (cmsRaw) {
+        const cms = JSON.parse(cmsRaw);
+        if (cms && cms.enquiries) {
+          cms.enquiries.unshift({
+            id: 'enq-' + Date.now(),
+            name,
+            phone,
+            email,
+            location: 'UAE Direct Website Lead',
+            service: 'General Inquiry',
+            message,
+            date: new Date().toISOString().slice(0, 16).replace('T', ' '),
+            status: 'New',
+            notes: 'Submitted via website contact form.'
+          });
+          localStorage.setItem('ALMAMOURA_CMS_STORE', JSON.stringify(cms));
+        }
+      }
+    } catch (err) {
+      console.error('Lead save error:', err);
+    }
+
+    showToast(`Thank you, ${name}! Your enquiry has been saved and routed to Al Mamoura Engineering.`);
     form.reset();
   });
 }

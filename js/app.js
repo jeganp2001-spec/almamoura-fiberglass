@@ -17,7 +17,51 @@ document.addEventListener('DOMContentLoaded', () => {
   initRfqCalculator();
   initContactForm();
   initSmoothScroll();
+  initSocialSpeedDial();
 });
+
+/* --------------------------------------------------------------------------
+   SOCIAL SPEED-DIAL POPUP — Instagram · LinkedIn · WhatsApp
+   -------------------------------------------------------------------------- */
+function initSocialSpeedDial() {
+  const dial    = document.getElementById('socialSpeedDial');
+  const trigger = document.getElementById('speedDialTrigger');
+  const backdrop= document.getElementById('speedDialBackdrop');
+
+  if (!dial || !trigger) return;
+
+  function openDial() {
+    dial.classList.add('open');
+    backdrop.classList.add('visible');
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDial() {
+    dial.classList.remove('open');
+    backdrop.classList.remove('visible');
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleDial(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dial.classList.contains('open') ? closeDial() : openDial();
+  }
+
+  // Respond to both click (desktop) and touchend (mobile)
+  trigger.addEventListener('click', toggleDial);
+  trigger.addEventListener('touchend', toggleDial, { passive: false });
+
+  // Clicking/touching outside the dial or backdrop closes it
+  backdrop.addEventListener('click', closeDial);
+  backdrop.addEventListener('touchend', closeDial);
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDial();
+  });
+}
+
 
 function syncCMSContentToLiveWebsite() {
   try {
